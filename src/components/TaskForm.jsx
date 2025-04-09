@@ -1,46 +1,47 @@
-// src/components/TaskForm.jsx
 import React, { useState } from 'react';
 
-const TaskForm = ({ addTask }) => {
-  const [taskName, setTaskName] = useState('');
-  const [taskDescription, setTaskDescription] = useState('');
-  const [error, setError] = useState('');
+const TaskForm = ({ onAddTask }) => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!taskName || !taskDescription) {
-      setError('Please fill in both fields');
+    if (!title || !description) {
+      alert('Please fill in both title and description');
       return;
     }
 
+    // Create a new task object with title, description, and a unique id
     const newTask = {
       id: Date.now(),
-      name: taskName,
-      description: taskDescription,
+      title,
+      description,
       completed: false,
     };
 
-    addTask(newTask);
-    setTaskName('');
-    setTaskDescription('');
-    setError('');
+    // Pass the new task back to App through onAddTask
+    onAddTask(newTask);
+
+    // Clear the form inputs
+    setTitle('');
+    setDescription('');
   };
 
   return (
-    <form onSubmit={handleSubmit} className="task-form">
+    <form onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Task Name"
-        value={taskName}
-        onChange={(e) => setTaskName(e.target.value)}
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Task Title"
       />
       <textarea
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
         placeholder="Task Description"
-        value={taskDescription}
-        onChange={(e) => setTaskDescription(e.target.value)}
-      ></textarea>
-      {error && <p className="error">{error}</p>}
+        rows="3"
+      />
       <button type="submit">Add Task</button>
     </form>
   );

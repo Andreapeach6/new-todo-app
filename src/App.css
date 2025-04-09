@@ -1,4 +1,4 @@
-/* src/App.css */
+/* Global styles */
 * {
   margin: 0;
   padding: 0;
@@ -7,99 +7,221 @@
 
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f7f7f7;
+  background-color: #f1f8ff; /* Soft pastel blue background */
+  color: #333;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  margin: 0;
 }
 
 .todo-container {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff; /* White background for container */
   width: 100%;
-  max-width: 400px;
+  max-width: 700px; /* Increased the width */
+  padding: 30px; /* Increased padding for larger container */
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  background: linear-gradient(135deg, #d6eaf8, #f7f9fa); /* Soft pastel gradient */
 }
 
 h1 {
-  text-align: center;
-  margin-bottom: 20px;
+  font-size: 2.5rem; /* Larger heading */
+  margin-bottom: 30px; /* Increased margin */
+  color: #2c3e50; /* Darker shade for text */
 }
 
-.task-form input,
-.task-form textarea {
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Increased gap between inputs */
+  margin-bottom: 40px; /* Increased margin bottom */
+}
+
+input,
+textarea {
+  padding: 15px; /* Increased padding */
+  border: 2px solid #bbb; /* Light border */
+  border-radius: 8px; /* Rounded corners */
+  font-size: 1.2rem; /* Increased font size */
+  outline: none;
+  transition: border 0.3s ease-in-out;
   width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
 }
 
-.task-form button {
-  width: 100%;
-  padding: 10px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.task-form button:hover {
-  background-color: #45a049;
-}
-
-.error {
-  color: red;
-  font-size: 14px;
-}
-
-.task-list {
-  margin-top: 20px;
-}
-
-.task-item {
-  padding: 15px;
-  margin: 10px 0;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.task-item.completed {
-  background-color: #e0ffe0;
-  text-decoration: line-through;
+input:focus,
+textarea:focus {
+  border-color: #3498db; /* Focus border color */
 }
 
 button {
-  margin: 5px;
-  padding: 8px;
-  background-color: #ff5722;
-  color: white;
+  padding: 15px; /* Increased padding */
+  background-color: #ff8f91; /* Pastel pink button color */
+  color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
+  font-size: 1.2rem; /* Increased font size */
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #e64a19;
+  background-color: #f44336; /* Darker shade of pink on hover */
 }
 
-.task-edit-form input,
-.task-edit-form textarea {
+button:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+/* Task List */
+.task-list {
+  margin-top: 40px; /* Increased margin */
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /* Increased gap between tasks */
+  text-align: left;
+}
+
+.task-item {
+  background-color: #f9f9f9; /* Very light grey for task items */
+  padding: 20px; /* Increased padding */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Increased gap between content */
   width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
 }
 
-.task-edit-form button {
-  width: 48%;
+.task-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.task-edit-form button:last-child {
-  background-color: #e64a19;
+.task-text {
+  font-size: 1.5rem; /* Increased font size */
+  color: #4e5d6c; /* Subtle dark text color */
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.task-text.completed {
+  text-decoration: line-through;
+  color: #95a5a6; /* Grey for completed tasks */
+}
+
+.task-actions {
+  display: flex;
+  gap: 20px; /* Increased gap between buttons */
+  justify-content: flex-end;
+}
+
+.mark-completed-btn,
+.edit-btn,
+.delete-btn {
+  padding: 12px 18px; /* Increased padding */
+  background-color: #f5a623; /* Pastel orange */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem; /* Increased font size */
+  transition: background-color 0.3s ease;
+}
+
+.mark-completed-btn:hover,
+.edit-btn:hover,
+.delete-btn:hover {
+  background-color: #d35400; /* Darker orange on hover */
+}
+
+.delete-btn {
+  background-color: #e74c3c; /* Pastel red for delete */
+}
+
+.delete-btn:hover {
+  background-color: #c0392b; /* Darker red on hover */
+}
+
+.save-edit-btn {
+  background-color: #7bed9f; /* Pastel green for save */
+  padding: 12px 18px; /* Increased padding */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem; /* Increased font size */
+  transition: background-color 0.3s ease;
+}
+
+.save-edit-btn:hover {
+  background-color: #2ecc71; /* Darker green on hover */
+}
+
+.edit-input {
+  padding: 15px; /* Increased padding */
+  width: 100%;
+  border: 2px solid #bbb;
+  border-radius: 8px;
+  font-size: 1.2rem; /* Increased font size */
+  margin-bottom: 20px;
+  transition: border 0.3s ease-in-out;
+}
+
+.edit-input:focus {
+  border-color: #3498db;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .todo-container {
+    width: 90%;
+    padding: 25px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .task-item {
+    padding: 15px;
+  }
+
+  .task-actions {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  .todo-container {
+    width: 90%;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  .task-item {
+    padding: 12px;
+  }
+}
+.edit-btn {
+  background-color: #77DD77; /* Pastel Green */
+  color: white; /* White text */
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-btn:hover {
+  background-color: #66cc66; /* Slightly darker green on hover */
 }

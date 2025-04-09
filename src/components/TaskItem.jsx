@@ -1,43 +1,49 @@
-// src/components/TaskItem.jsx
 import React, { useState } from 'react';
 
-const TaskItem = ({ task, deleteTask, toggleTaskCompletion, editTask }) => {
+const TaskItem = ({ task, onToggle, onDelete, onEdit }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [newName, setNewName] = useState(task.name);
-  const [newDescription, setNewDescription] = useState(task.description);
+  const [updatedDescription, setUpdatedDescription] = useState(task.description);
 
-  const handleEdit = () => {
-    editTask(task.id, { name: newName, description: newDescription });
-    setIsEditing(false);
+  const handleSave = () => {
+    onEdit(task.id, updatedDescription);
+    setIsEditing(false); // Stop editing
   };
 
   return (
-    <div className={`task-item ${task.completed ? 'completed' : ''}`}>
-      {isEditing ? (
-        <div className="task-edit-form">
-          <input
-            type="text"
-            value={newName}
-            onChange={(e) => setNewName(e.target.value)}
-          />
-          <textarea
-            value={newDescription}
-            onChange={(e) => setNewDescription(e.target.value)}
-          ></textarea>
-          <button onClick={handleEdit}>Save</button>
-          <button onClick={() => setIsEditing(false)}>Cancel</button>
+    <div className="task-item">
+      <div className="task-content">
+        <div
+          className={`task-text ${task.completed ? 'completed' : ''}`}
+          onClick={() => onToggle(task.id)}
+        >
+          {task.title}
         </div>
-      ) : (
-        <div>
-          <h3>{task.name}</h3>
-          <p>{task.description}</p>
-          <button onClick={() => toggleTaskCompletion(task.id)}>
-            {task.completed ? 'Mark Incomplete' : 'Mark Completed'}
-          </button>
-          <button onClick={() => setIsEditing(true)}>Edit</button>
-          <button onClick={() => deleteTask(task.id)}>Delete</button>
-        </div>
-      )}
+
+        {isEditing ? (
+          <div>
+            <textarea
+              value={updatedDescription}
+              onChange={(e) => setUpdatedDescription(e.target.value)}
+              className="task-description-edit"
+            />
+            <button className="save-btn" onClick={handleSave}>Save</button>
+          </div>
+        ) : (
+          <div className="task-description">{task.description}</div>
+        )}
+      </div>
+
+      <div className="task-actions">
+        <button className="mark-completed-btn" onClick={() => onToggle(task.id)}>
+          {task.completed ? 'Unmark' : 'Mark Completed'}
+        </button>
+        <button className="edit-btn" onClick={() => setIsEditing(true)}>
+          Edit
+        </button>
+        <button className="delete-btn" onClick={() => onDelete(task.id)}>
+          Delete
+        </button>
+      </div>
     </div>
   );
 };
